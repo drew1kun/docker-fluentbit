@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     libssl-dev \
     libyaml-dev \
+    libsystemd-dev \
     zlib1g-dev \
     libcurl4-openssl-dev \
     ca-certificates \
@@ -49,7 +50,7 @@ RUN rm -rf build && \
 
 RUN cmake --build build -j$(nproc)
 
-RUN strip build/bin/fluent-bit
+RUN strip /src/build/bin/fluent-bit
 
 RUN mkdir -p /deps && \
     ldd /src/build/bin/fluent-bit | \

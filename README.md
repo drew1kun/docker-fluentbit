@@ -33,7 +33,6 @@ docker buildx build \
     --load .
 
 # Test:
-```bash
 docker run --rm \
     drew1kun/fluentbit:${fluentbit_version}-distroless \
     --version
@@ -44,45 +43,5 @@ PROFIT
 ## IMPORTANT!
 
 The image is intented to be as minimal as possible.
-Check the list of enabled features in distroless.Dockerfile.
+Check the list of enabled features in [distroless.Dockerfile](distroless.Dockerfile).
 
-Currently:
-
-```bash
-RUN cmake \
-    -S . \
-    -B build \
-    -DCMAKE_BUILD_TYPE=Release \
-    # Enabled: \
-    -DFLB_CONFIG_YAML=On \
-    -DFLB_RELEASE=On \
-    -DFLB_IN_TAIL=On \
-    -DFLB_IN_SYSTEMD=On \
-    -DFLB_IN_KMSG=On \
-    -DFLB_LUAJIT=On \
-    -DFLB_OUT_SYSLOG=On \
-    -DFLB_FILTER_GREP=On \
-    -DFLB_FILTER_MODIFY=On \
-    -DFLB_FILTER_PARSER=On \
-    -DFLB_FILTER_RECORD_MODIFIER=On \
-    -DFLB_FILTER_LUA=On \
-    -DFLB_IN_STORAGE_BACKLOG=On \
-    # Disabled: \
-    -DFLB_AWS=Off \
-    -DFLB_JEMALLOC=Off \
-    -DFLB_FILTER_GEOIP2=Off \
-    -DFLB_FILTER_TENSORFLOW=Off \
-    -DFLB_OUT_DATADOG=Off \
-    -DFLB_OUT_LOKI=Off \
-    -DFLB_OUT_PROMETHEUS_EXPORTER=Off \
-    -DFLB_OUT_INFLUXDB=Off \
-    -DFLB_OUT_KAFKA=Off \
-    -DFLB_OUT_HTTP=Off \
-    -DFLB_OUT_ES=Off \
-    -DFLB_OUT_OPENSEARCH=Off \
-    -DFLB_OUT_STACKDRIVER=Off \
-    -DFLB_OUT_S3=Off \
-    -DFLB_OUT_AZURE=Off \
-    -DFLB_TLS=Off \
-    -DFLB_WASM=Off
-```

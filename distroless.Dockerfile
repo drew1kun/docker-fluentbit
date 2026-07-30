@@ -63,3 +63,4 @@ COPY --from=builder /src/build/bin/fluent-bit /fluent-bit/bin/fluent-bit
 COPY --from=builder /deps /
 
 ENTRYPOINT ["/fluent-bit/bin/fluent-bit"]
+CMD ["-c", "/fluent-bit/etc/fluent-bit.conf"]

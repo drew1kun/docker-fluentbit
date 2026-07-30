@@ -28,41 +28,24 @@ RUN rm -rf build && \
     -S . \
     -B build \
     -DCMAKE_BUILD_TYPE=Release \
-    # Enabled: \
-    -DFLB_RELEASE=On \
+    -DFLB_ALL=Off \
+    -DFLB_BINARY=On \
     -DFLB_CONFIG_YAML=On \
-    -DFLB_IN_SYSTEMD=On \
-    -DFLB_IN_TAIL=On \
+    -DFLB_FILTER_LUA=On \
+    -DFLB_FILTER_MODIFY=On \
+    -DFLB_HTTP_SERVER=On \
+    -DFLB_IN_DOCKER=On \
+    -DFLB_IN_DOCKER_EVENTS=On \
     -DFLB_IN_KMSG=On \
-    -DFLB_OUT_SYSLOG=On \
+    -DFLB_IN_SYSTEMD=On \
+    -DFLB_IN_UNIX_SOCKET=On \
+    -DFLB_IN_TAIL=On \
     -DFLB_LUAJIT=On \
+    -DFLB_OUT_SYSLOG=On \
+    -DFLB_PARSER=On \
     -DFLB_RECORD_ACCESSOR=On \
-    # Disabled - Basic: \
-    -DFLB_JEMALLOC=Off \
-    -DFLB_TLS=Off \
-    -DFLB_WASM=Off \
-    # Disabled - Others: \
-    #-DFLB_AWS=Off \
-    -DFLB_FILTER_GEOIP2=Off \
-    -DFLB_FILTER_TENSORFLOW=Off \
-    -DFLB_HTTP_CLIENT_DEBUG=Off \
-    -DFLB_IN_HTTP=Off \
-    -DFLB_OUT_DATADOG=Off \
-    -DFLB_OUT_LOKI=Off \
-    -DFLB_OUT_PROMETHEUS_EXPORTER=Off \
-    -DFLB_OUT_INFLUXDB=Off \
-    -DFLB_OUT_KAFKA=Off \
-    -DFLB_OUT_HTTP=Off \
-    -DFLB_OUT_ES=Off \
-    -DFLB_OUT_OPENSEARCH=Off \
-    -DFLB_OUT_STACKDRIVER=Off \
-    -DFLB_OUT_AZURE=Off \
-    -DFLB_OUT_S3=Off \
-    -DFLB_OUT_CLOUDWATCH_LOGS=Off \
-    -DFLB_OUT_KINESIS_FIREHOSE=Off \
-    -DFLB_OUT_KINESIS_STREAMS=Off \
-    -DFLB_FILTER_ECS=Off \
-    -DFLB_FILTER_AWS=Off
+    -DFLB_RELEASE=On \
+    -DFLB_JEMALLOC=Off # this key makes it work with PAGE_SIZE=16k
 
 RUN cmake --build build -j$(nproc)
 

@@ -11,7 +11,7 @@ The build process is handled by github actions and does auto-tagging the docker 
 Any changes done to repo are being ignored by CI unless the `versions.yml` file modification is committed.
 
 - Check the [upstream docker hub page](https://hub.docker.com/r/fluent/fluent-bit/tags) for new image tags
-- Modify `versions.yml` with new version and digest
+- Modify `FLUENT_BIT_VERSION` var in [distroless.Dockerfile](distroless.Dockerfile) using the latest tag (see [fluent-bit github repo](https://github.com/fluent/fluent-bit/tags))
 - Sign and Commit
 
 ```bash

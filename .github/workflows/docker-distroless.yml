@@ -72,6 +72,14 @@ jobs:
     needs: tag
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        include:
+          - target: distroless
+            variant: distroless
+          - target: distroless-debug
+            variant: distroless-debug
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -116,8 +124,9 @@ jobs:
         with:
           context: .
           file: distroless.Dockerfile
+          target: ${{ matrix.target }}
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            drew1kun/fluentbit:${{ steps.upstream.outputs.distroless_patch }}-distroless
-            ghcr.io/drew1kun/fluentbit:${{ steps.upstream.outputs.distroless_patch }}-distroless
+            drew1kun/fluentbit:${{ steps.upstream.outputs.distroless_patch }}-${{ matrix.variant }}
+            ghcr.io/drew1kun/fluentbit:${{ steps.upstream.outputs.distroless_patch }}-${{ matrix.variant }}

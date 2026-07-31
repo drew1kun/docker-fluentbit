@@ -57,10 +57,21 @@ RUN mkdir -p /deps && \
     awk '{ if ($3 ~ /^\//) print $3 }' | \
     xargs -r -I{} cp --parents {} /deps/
 
-FROM gcr.io/distroless/base-debian12
+
+# Production target:
+FROM gcr.io/distroless/base-debian12 AS distroless
 
 COPY --from=builder /src/build/bin/fluent-bit /fluent-bit/bin/fluent-bit
 COPY --from=builder /deps /
 
 ENTRYPOINT ["/fluent-bit/bin/fluent-bit"]
 CMD ["-c", "/fluent-bit/etc/fluent-bit.conf"]
+
+
+# Debug target:
+FROM gcr.io/distroless/base-debian12:debug AS distroless-debug
+
+COPY --from=builder /src/build/bin/fluent-bit /fluent-bit/bin/fluent-bit
+COPY --from=builder /deps /
+
+CMD ["/fluent-bit/bin/fluent-bit", "-c", "/fluent-bit/etc/fluent-bit.conf"]

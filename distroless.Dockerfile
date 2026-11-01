@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /src
 
-ARG FLUENT_BIT_VERSION=v5.0.9
+ARG FLUENT_BIT_VERSION=v5.1.5
 
 RUN git clone --depth 1 --branch ${FLUENT_BIT_VERSION} \
     https://github.com/fluent/fluent-bit.git .
